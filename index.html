@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>ARキッチン配置</title>
+  <!-- model-viewerの読み込み -->
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/modelviewer/3.1.1/model-viewer.min.js"></script>
+  <style>
+    body { margin: 0; padding: 0; font-family: sans-serif; }
+    #ar-container { width: 100vw; height: 100vh; }
+    model-viewer {
+      width: 100%;
+      height: 100%;
+      background-color: #f4f4f4;
+    }
+    .instruction {
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+      text-align: center;
+      pointer-events: none;
+    }
+    .instruction p {
+      background: rgba(0,0,0,0.6);
+      color: white;
+      padding: 10px;
+      border-radius: 8px;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="ar-container">
+    <!-- srcに3DモデルのURLを指定。ar属性をつけることでARボタンが表示される -->
+    <model-viewer 
+      src="https://modelviewer.dev/shared-assets/models/Astronaut.glb" 
+      ios-src="https://modelviewer.dev/shared-assets/models/Astronaut.usdz"
+      alt="キッチンの3Dモデル" 
+      ar 
+      ar-modes="webxr scene-viewer quick-look" 
+      camera-controls 
+      auto-rotate>
+      
+      <!-- AR起動ボタンのカスタマイズ（デフォルトでも可） -->
+      <button slot="ar-button" style="background-color: #007bff; color: white; border: none; padding: 12px 24px; border-radius: 4px; position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); font-size: 16px;">
+        部屋に配置する (AR)
+      </button>
+
+    </model-viewer>
+  </div>
+
+  <div class="instruction">
+    <p>右下のボタンを押してARを起動してください</p>
+  </div>
+
+</body>
+</html>
