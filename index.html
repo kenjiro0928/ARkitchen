@@ -2,23 +2,26 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ARキッチン配置</title>
-  <!-- model-viewerの読み込み -->
-  <script type="module" src="https://ajax.googleapis.com/ajax/libs/modelviewer/3.1.1/model-viewer.min.js"></script>
+  <!-- model-viewerの最新版を読み込み -->
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/modelviewer/3.4.0/model-viewer.min.js"></script>
   <style>
-    body { margin: 0; padding: 0; font-family: sans-serif; }
+    body { margin: 0; padding: 0; font-family: sans-serif; overflow: hidden; }
     #ar-container { width: 100vw; height: 100vh; }
     model-viewer {
       width: 100%;
       height: 100%;
-      background-color: #f4f4f4;
+      background-color: #e0e0e0; /* 読み込み中だとわかるように少しグレーにしています */
     }
+    /* 説明文を画面上部に移動して重なりを解消 */
     .instruction {
       position: absolute;
-      bottom: 20px;
+      top: 30px;
       width: 100%;
       text-align: center;
       pointer-events: none;
+      z-index: 10;
     }
     .instruction p {
       background: rgba(0,0,0,0.6);
@@ -26,13 +29,17 @@
       padding: 10px;
       border-radius: 8px;
       display: inline-block;
+      margin: 0;
     }
   </style>
 </head>
 <body>
 
+  <div class="instruction">
+    <p>3Dモデルが表示されたら下部のボタンを押してください</p>
+  </div>
+
   <div id="ar-container">
-    <!-- srcに3DモデルのURLを指定。ar属性をつけることでARボタンが表示される -->
     <model-viewer 
       src="https://modelviewer.dev/shared-assets/models/Astronaut.glb" 
       ios-src="https://modelviewer.dev/shared-assets/models/Astronaut.usdz"
@@ -42,16 +49,12 @@
       camera-controls 
       auto-rotate>
       
-      <!-- AR起動ボタンのカスタマイズ（デフォルトでも可） -->
-      <button slot="ar-button" style="background-color: #007bff; color: white; border: none; padding: 12px 24px; border-radius: 4px; position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); font-size: 16px;">
+      <!-- AR起動ボタン -->
+      <button slot="ar-button" style="background-color: #007bff; color: white; border: none; padding: 15px 30px; border-radius: 8px; position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); font-size: 18px; font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
         部屋に配置する (AR)
       </button>
 
     </model-viewer>
-  </div>
-
-  <div class="instruction">
-    <p>右下のボタンを押してARを起動してください</p>
   </div>
 
 </body>
